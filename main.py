@@ -74,7 +74,13 @@ def game():
             endTime = time.time()
             break
         attempts += 1
+        if attempts > 10:
+            print("The code has blocked due to many failed attempts!")
+            print("You lost :c. The code was", str(code))
+            return
     print("You won!")
+    print("Attempts:", attempts)
+    print("Time:", endTime - startTime, "seg")
 
 class bcolors:
     OKAY = '\033[92m'
@@ -83,4 +89,3 @@ class bcolors:
     ENDC = '\033[0m'
 
 game()
-# print(f"{bcolors.OKAY}Warning: No active frommets remain. Continue?{bcolors.ENDC}")
