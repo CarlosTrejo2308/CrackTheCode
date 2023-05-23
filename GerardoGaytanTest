@@ -1,0 +1,38 @@
+import unittest
+from unittest.mock import patch
+from io import StringIO
+
+from main import getCode, getUserAttempt, compareCode
+
+class TestGuessingGame(unittest.TestCase):
+    @patch('random.randint')
+    def test_getCode(self, randint_mock):
+        randint_mock.side_effect = [1, 2, 3, 4]
+        code = getCode()
+        self.assertEqual(code, [1, 2, 3, 4])
+
+    @patch('builtins.input', side_effect=['1234'])
+    def test_getUserAttempt(self, input_mock):
+        user_guess = getUserAttempt()
+        self.assertEqual(user_guess, [1, 2, 3, 4])
+
+    def test_compareCode_same_guess(self):
+        guess = [1, 2, 3, 4]
+        code = [1, 2, 3, 4]
+        result = compareCode(guess, code)
+        self.assertTrue(result)
+
+    def test_compareCode_different_guess(self):
+        guess = [1, 2, 3, 4]
+        code = [5, 6, 7, 8]
+        result = compareCode(guess, code)
+        self.assertFalse(result)
+
+    def test_compareCode_partial_match(self):
+        guess = [1, 2, 3, 4]
+        code = [1, 6, 7, 8]
+        result = compareCode(guess, code)
+        self.assertFalse(result)
+
+if __name__ == '__main__':
+    unittest.main()
