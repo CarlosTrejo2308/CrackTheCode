@@ -1,4 +1,5 @@
 import unittest
+from main import getCode, compareCode
 
 class TestGuessingGame(unittest.TestCase):
     def test_getCode(self):
