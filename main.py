@@ -62,13 +62,13 @@ def printHints(guess, colors):
 def game():
     LENGTH = 4
     print("_ " * LENGTH)
-    code = getCode()
+    code = getCode(LENGTH)
 
     attempts = 0
     startTime = time.time()
 
     while True:
-        guess = getUserAttempt()
+        guess = getUserAttempt(LENGTH)
         win = compareCode(guess, code)
         if win:
             endTime = time.time()
